@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+    driver:
+      class: org.h2.Driver
+    hikari:
+      pool-name: alert
+      connection-timeout: 60000
+      minimum-idle: 3
+      maximum-pool-size: 100
+      leak-detection-threshold: 60000
+      connection-init-sql: SELECT 1 FROM DUAL
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+      dialect: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    baselineVersion: 0
+    url: ${spring.datasource.url}
+    user: sa
+    password:
+  application:
+    name: pessoas-api
+
+pessoa-api:
+  identificador:
+    documentos:
+      11: 'PF'
+      14: 'PJ'
+      8 : 'EU'
+      10: 'AP'
+  tipo-identificador:
+    valores:
+      PF:
+        valorMin: 300.00
+        valorMax: 10000.00
+      PJ:
+        valorMin: 1000.00
+        valorMax: 100000.00
+      EU:
+        valorMin: 100.00
+        valorMax: 10000.00
+      AP:
+        valorMin: 400.00
+        valorMax: 25000.00
